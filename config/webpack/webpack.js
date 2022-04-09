@@ -1,19 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
-  mode: "development",
-  devtool: "inline-source-map",
-
-  devServer: {
-    static: "../build",
-    port: 3000,
-    compress: true,
-    historyApiFallback: true,
-  },
-
   entry: {
     index: "./src/index.js",
   },
@@ -32,7 +21,7 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, "../build"),
+    path: path.resolve(__dirname, "../../build"),
     filename: "[name].[contenthash].js",
     clean: true,
   },
@@ -45,10 +34,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
     }),
-    new ReactRefreshWebpackPlugin(),
-    // new BundleAnalyzerPlugin({
-    //   generateStatsFile: true,
-    // }),
   ],
 
   module: {

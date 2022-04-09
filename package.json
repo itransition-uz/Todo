@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env SERVE=true webpack serve -c config/webpack.config.js",
-    "build": "webpack --mode=production -c config/webpack.config.js",
-    "test": "webpack --mode=development -c config/webpack.config.js"
+    "start": "cross-env SERVE=true webpack serve -c config/webpack/development.js",
+    "build": "webpack -c config/webpack/production.js",
+    "test": "webpack -c config/webpack/test.js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +41,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "sass": "^1.50.0",
-    "sass-loader": "^12.6.0"
+    "sass-loader": "^12.6.0",
+    "webpack-merge": "^5.8.0"
   }
 }
