@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
-import TodoList from "../#/todos/TodoList";
-import Navbar from "../#/todos/Navbar";
-import TodoAddForm from "../#/todos/TodoAddForm";
-import { ITodo } from "../#/todos/interfaces";
+import TodoList from "../cmp/todos/TodoList";
+import Navbar from "../cmp/todos/Navbar";
+import TodoAddForm from "../cmp/todos/TodoAddForm";
+import { ITodo } from "../cmp/todos/interfaces";
 
 function App() {
   const [todos, setTodos] = useState<ITodo[]>([]);

@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -10,19 +10,6 @@ import { ITodo } from "./interfaces";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "none",
-  boxShadow: 24,
-  p: 4,
-  outline: "none",
-};
 
 interface IProps {
   todos: ITodo[];
@@ -110,7 +97,20 @@ const TodoList: React.FC<IProps> = ({ todos, onCheck, onDelete, onEdit }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            bgcolor: "background.paper",
+            border: "none",
+            boxShadow: 24,
+            p: 4,
+            outline: "none",
+          }}
+        >
           <Grid item xs={12}>
             <TextField
               fullWidth
@@ -149,11 +149,9 @@ const TodoList: React.FC<IProps> = ({ todos, onCheck, onDelete, onEdit }) => {
   }
 
   function timeSince(date: Date) {
-    let seconds = Math.floor(
+    const seconds = Math.floor(
       (new Date().valueOf() - new Date(date).valueOf()) / 1000
     );
-
-    console.log(seconds);
 
     let interval = +seconds / 31536000;
 
