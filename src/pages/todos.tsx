@@ -39,6 +39,7 @@ function App() {
       todos.concat({
         id: uuid(),
         title: title,
+        created_at: new Date(),
       })
     );
   }

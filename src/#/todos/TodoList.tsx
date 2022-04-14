@@ -10,6 +10,7 @@ import { ITodo } from "./interfaces";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -65,6 +66,14 @@ const TodoList: React.FC<IProps> = ({ todos, onCheck, onDelete, onEdit }) => {
                   }}
                 >
                   {todo.title}
+                </Typography>
+                <Typography
+                  variant="overline"
+                  sx={{
+                    textDecoration: todo.completed_at ? `line-through` : "",
+                  }}
+                >
+                  {timeSince(todo.created_at)} назад
                 </Typography>
               </Grid>
 
@@ -137,6 +146,37 @@ const TodoList: React.FC<IProps> = ({ todos, onCheck, onDelete, onEdit }) => {
     setEditedTodo(params);
 
     setModalStatus(true);
+  }
+
+  function timeSince(date: Date) {
+    let seconds = Math.floor(
+      (new Date().valueOf() - new Date(date).valueOf()) / 1000
+    );
+
+    console.log(seconds);
+
+    let interval = +seconds / 31536000;
+
+    if (interval > 1) {
+      return Math.floor(interval) + " лет";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + " месяц";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + " день";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + " час";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + " минут";
+    }
+    return Math.floor(seconds) + " секунд";
   }
 };
 
