@@ -17,6 +17,7 @@ function App() {
         <TodoList
           todos={todos}
           onCheck={checkHandler}
+          onEdit={editHandler}
           onDelete={deleteHandler}
         />
       </Container>
@@ -50,6 +51,18 @@ function App() {
     const newTodos = todos.map((todo) => {
       if (todo.id === id) {
         todo.deleted_at = new Date();
+      }
+
+      return todo;
+    });
+
+    setTodos(newTodos);
+  }
+
+  function editHandler({ newTitle, id }: { newTitle: string; id: string }) {
+    const newTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.title = newTitle;
       }
 
       return todo;
