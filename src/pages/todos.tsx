@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Grid } from "@mui/material";
 import TodoList from "../#/todos/TodoList";
 import Navbar from "../#/todos/Navbar";
@@ -7,6 +7,16 @@ import { ITodo } from "../#/todos/interfaces";
 
 function App() {
   const [todos, setTodos] = useState<ITodo[]>([]);
+
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem("todos") || `[]`);
+
+    setTodos(storedTodos);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <>
