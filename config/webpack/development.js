@@ -1,6 +1,7 @@
 const { merge } = require("webpack-merge");
 const webpack = require("./webpack.js");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = merge(webpack, {
   devtool: "inline-source-map",
@@ -11,5 +12,10 @@ module.exports = merge(webpack, {
     compress: true,
     historyApiFallback: true,
   },
-  plugins: [new ReactRefreshWebpackPlugin()],
+  plugins: [
+    new ReactRefreshWebpackPlugin(),
+    new ESLintPlugin({
+      extensions: ["js", "jsx", "ts", "tsx"],
+    }),
+  ],
 });

@@ -4,7 +4,7 @@ import Todos from "./pages/todos";
 function App() {
   return (
     <>
-      <Todos />
+      <Todos todos={[]} />
     </>
   );
 }

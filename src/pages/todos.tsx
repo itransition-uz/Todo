@@ -1,22 +1,39 @@
-import React, { useState } from "react";
-import { Container, Grid } from "@mui/material";
-import TodoList from "../#/todos/TodoList";
-import Navbar from "../#/todos/Navbar";
-import TodoAddForm from "../#/todos/TodoAddForm";
-import { ITodo } from "../#/todos/interfaces";
+import React, { useEffect, useState } from "react";
+import { Container } from "@mui/material";
+import TodoList from "../cmp/todos/TodoList";
+import Navbar from "../cmp/todos/Navbar";
+import TodoAddForm from "../cmp/todos/TodoAddForm";
+import { ITodo } from "../cmp/todos/interfaces";
 
-function App() {
-  const [todos, setTodos] = useState<ITodo[]>([]);
+interface IProps {
+  todos: ITodo[];
+}
+
+function App(props: IProps) {
+  const [todos, setTodos] = useState<ITodo[]>(props.todos || []);
+
+  useEffect(() => {
+    const storedTodos = JSON.parse(
+      localStorage.getItem("todos") || JSON.stringify(props.todos)
+    );
+
+    setTodos(storedTodos);
+  }, [props.todos]);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <>
-      <Navbar />
+      <Navbar title={`Ежедневные задачи:`} />
 
       <Container maxWidth="sm" sx={{ padding: `1rem` }}>
         <TodoAddForm onAdd={addHandler} />
         <TodoList
           todos={todos}
           onCheck={checkHandler}
+          onEdit={editHandler}
           onDelete={deleteHandler}
         />
       </Container>
@@ -28,6 +45,7 @@ function App() {
       todos.concat({
         id: uuid(),
         title: title,
+        created_at: new Date(),
       })
     );
   }
@@ -50,6 +68,18 @@ function App() {
     const newTodos = todos.map((todo) => {
       if (todo.id === id) {
         todo.deleted_at = new Date();
+      }
+
+      return todo;
+    });
+
+    setTodos(newTodos);
+  }
+
+  function editHandler({ newTitle, id }: { newTitle: string; id: string }) {
+    const newTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.title = newTitle;
       }
 
       return todo;

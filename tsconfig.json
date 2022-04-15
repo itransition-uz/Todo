@@ -20,7 +20,7 @@
         "noEmit": false,
         "jsx": "react",
         "paths": {
-            "@" : ["./src/#"]
+            "@" : ["./src/cmp"]
         }    
     },
     "include": [
