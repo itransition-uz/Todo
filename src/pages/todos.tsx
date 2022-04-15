@@ -18,7 +18,7 @@ function App(props: IProps) {
     );
 
     setTodos(storedTodos);
-  }, []);
+  }, [props.todos]);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));

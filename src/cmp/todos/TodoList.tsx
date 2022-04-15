@@ -67,7 +67,7 @@ const TodoList: React.FC<IProps> = ({ todos, onCheck, onDelete, onEdit }) => {
               <Grid item xs={2}>
                 <Stack direction="row" alignItems="center" spacing={1}>
                   <IconButton
-                    aria-label="delete"
+                    aria-label="edit"
                     size="small"
                     onClick={() =>
                       editHandler({
