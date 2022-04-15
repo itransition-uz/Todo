@@ -39,14 +39,14 @@ const TodoList: React.FC<IProps> = ({ todos, onCheck, onDelete, onEdit }) => {
               }}
               alignItems="center"
             >
-              <Grid xs={2}>
+              <Grid item xs={2}>
                 <Checkbox
                   checked={todo.completed_at ? true : false}
                   onClick={() => onCheck(todo.id)}
                 />
               </Grid>
 
-              <Grid xs={8}>
+              <Grid item xs={8}>
                 <Typography
                   sx={{
                     textDecoration: todo.completed_at ? `line-through` : "",
@@ -64,7 +64,7 @@ const TodoList: React.FC<IProps> = ({ todos, onCheck, onDelete, onEdit }) => {
                 </Typography>
               </Grid>
 
-              <Grid xs={2}>
+              <Grid item xs={2}>
                 <Stack direction="row" alignItems="center" spacing={1}>
                   <IconButton
                     aria-label="delete"

@@ -3,7 +3,11 @@ import Box from "@mui/material/Box";
 import Badge from "@mui/material/Badge";
 import { teal } from "@mui/material/colors";
 
-function Navbar() {
+interface IProps {
+  title: string;
+}
+
+function Navbar(props: IProps) {
   return (
     <Box
       sx={{
@@ -18,7 +22,7 @@ function Navbar() {
     >
       <h2>
         <Badge badgeContent={4} color={"info"}>
-          Ежедневные задачи:
+          {props.title}
         </Badge>
       </h2>
     </Box>

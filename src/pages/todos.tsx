@@ -5,11 +5,17 @@ import Navbar from "../cmp/todos/Navbar";
 import TodoAddForm from "../cmp/todos/TodoAddForm";
 import { ITodo } from "../cmp/todos/interfaces";
 
-function App() {
-  const [todos, setTodos] = useState<ITodo[]>([]);
+interface IProps {
+  todos: ITodo[];
+}
+
+function App(props: IProps) {
+  const [todos, setTodos] = useState<ITodo[]>(props.todos || []);
 
   useEffect(() => {
-    const storedTodos = JSON.parse(localStorage.getItem("todos") || `[]`);
+    const storedTodos = JSON.parse(
+      localStorage.getItem("todos") || JSON.stringify(props.todos)
+    );
 
     setTodos(storedTodos);
   }, []);
@@ -20,7 +26,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar title={`Ежедневные задачи:`} />
 
       <Container maxWidth="sm" sx={{ padding: `1rem` }}>
         <TodoAddForm onAdd={addHandler} />
